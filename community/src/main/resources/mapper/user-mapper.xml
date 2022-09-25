@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.miki.community.dao.UserMapper"><!--声明这个配置文件是为哪个mapper服务的-->
+    
+    <sql id="selectFields"><!--把字段取出来复用，取别名selectFields-->
+        id,username,password,salt,email,type,status,activation_code,header_url,create_time
+    </sql>
+
+    <sql id="insertFields"><!--把字段取出来复用，取别名insertFields-->
+        username,password,salt,email,type,status,activation_code,header_url,create_time
+    </sql>
+    
+    <select id="selectById" resultType="User"><!--id与前面接口中的方法名对应，返回值类型不是系统自带的需声明-->
+        select <include refid="selectFields"></include><!--用别名selectFields代替-->
+        from user
+        where id = #{id}<!--前面的id为数据库字段，后面为参数属性（驼峰命名）-->
+    </select>
+
+    <select id="selectByName" resultType="User">
+        select <include refid="selectFields"></include>
+        from user
+        where username = #{username}
+    </select>
+
+    <select id="selectByEmail" resultType="User">
+        select <include refid="selectFields"></include>
+        from user
+        where email = #{email}
+    </select>
+    
+    <insert id="insertUser" parameterType="User" keyProperty="id"><!--参数类型声明，在增加的时候要把主键的类型声明，因为mybatis会从底层获取自动生成的id填入-->
+        insert into user(<include refid="insertFields"></include>)
+        values(#{username}, #{password}, #{salt}, #{email}, #{type}, #{status}, #{activationCode}, #{headerUrl}, #{createTime})
+    </insert>
+    
+    <update id="updateStatus">
+        update user set status = #{status} where id = #{id}
+    </update>
+
+    <update id="updateHeader">
+        update user set header_url = #{headerUrl} where id = #{id}
+    </update>
+
+    <update id="updatePassword">
+        update user set password = #{password} where id = #{id}
+    </update>
+
+</mapper>
