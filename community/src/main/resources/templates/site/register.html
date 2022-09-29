@@ -7,12 +7,12 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
 	<link rel="stylesheet" th:href="@{/css/global.css}" />
 	<link rel="stylesheet" th:href="@{/css/login.css}" />
-	<title>牛客网-注册</title>
+	<title>Miki社区-注册</title>
 </head>
 <body>
 	<div class="nk-container">
 		<!-- 头部 -->
-		<header class="bg-dark sticky-top" th:replace="index::header">
+		<header class="bg-dark sticky-top" th:replace="index::header"><!--th:replace="index::header——>复用index页面的header-->
 			<div class="container">
 				<!-- 导航 -->
 				<nav class="navbar navbar-expand-lg navbar-dark">
@@ -67,25 +67,35 @@
 					<div class="form-group row">
 						<label for="username" class="col-sm-2 col-form-label text-right">账号:</label>
 						<div class="col-sm-10">
-							<input type="text" th:class="|form-control ${usernameMsg!=null?'is-invalid':''}|" th:value="${user!=null?user.username:''}" id="username" name="username" placeholder="请输入您的账号!" required>
+							<input type="text"
+								   th:class="|form-control ${usernameMsg!=null?'is-invalid':''}|"
+								   th:value="${user!=null?user.username:''}"
+								   id="username" name="username" placeholder="请输入您的账号!" required>
+							<!--${usernameMsg!=null?'is-invalid':''——>判断是否有错误信息，如果没有则下面的div不会显示出来-->
+							<!--th:value——>注册失败后显示注册页面的数据，有就显示，没有就空-->
 							<div class="invalid-feedback" th:text="${usernameMsg}">
-								该账号已存在!
+								该账号已存在!<!--th:text="${usernameMsg}把错误信息显示出来-->
 							</div>
 						</div>
 					</div>
 					<div class="form-group row mt-4">
 						<label for="password" class="col-sm-2 col-form-label text-right">密码:</label>
 						<div class="col-sm-10">
-							<input type="password" th:class="|form-control ${passwordMsg!=null?'is-invalid':''}|" th:value="${user!=null?user.password:''}" id="password" name="password" placeholder="请输入您的密码!" required>
+							<input type="password"
+								   th:class="|form-control ${passwordMsg!=null?'is-invalid':''}|"
+								   th:value="${user!=null?user.password:''}"
+								   id="password" name="password" placeholder="请输入您的密码!" required>
 							<div class="invalid-feedback" th:text="${passwordMsg}">
 								密码长度不能小于8位!
 							</div>							
 						</div>
 					</div>
 					<div class="form-group row mt-4">
-						<label for="confirm-password" class="col-sm-2 col-form-label text-right">确认密码:</label>
+						<label for="confirm-password" class="col-sm-2 col-form-label text-right">确认密码:</label><!--确认密码是前端的逻辑，并不会上传数据-->
 						<div class="col-sm-10">
-							<input type="password" class="form-control" th:value="${user!=null?user.password:''}" id="confirm-password" placeholder="请再次输入密码!" required>
+							<input type="password" class="form-control"
+								   th:value="${user!=null?user.password:''}"
+								   id="confirm-password" placeholder="请再次输入密码!" required>
 							<div class="invalid-feedback">
 								两次输入的密码不一致!
 							</div>
@@ -94,7 +104,10 @@
 					<div class="form-group row">
 						<label for="email" class="col-sm-2 col-form-label text-right" >邮箱:</label>
 						<div class="col-sm-10">
-							<input type="email" th:class="|form-control ${emailMsg!=null?'is-invalid':''}|" th:value="${user!=null?user.email:''}" id="email" name="email" placeholder="请输入您的邮箱!" required>
+							<input type="email"
+								   th:class="|form-control ${emailMsg!=null?'is-invalid':''}|"
+								   th:value="${user!=null?user.email:''}"
+								   id="email" name="email" placeholder="请输入您的邮箱!" required>
 							<div class="invalid-feedback" th:text="${emailMsg}">
 								该邮箱已注册!
 							</div>
@@ -151,18 +164,18 @@
 							<div class="col">
 								<ul class="nav btn-group-vertical company-info">
 									<li class="nav-item text-white-50">
-										公司地址：北京市朝阳区大屯路东金泉时代3-2708北京牛客科技有限公司
+										公司地址：江西省南昌市南昌县莲塘镇小蓝经济开发区
 									</li>
 									<li class="nav-item text-white-50">
-										联系方式：010-60728802(电话)&nbsp;&nbsp;&nbsp;&nbsp;admin@nowcoder.com
+										联系方式：18870089608(电话)&nbsp;&nbsp;&nbsp;&nbsp;admin@3150038664@qq.com
 									</li>
 									<li class="nav-item text-white-50">
-										牛客科技©2018 All rights reserved
+										Miki社区©2022 All rights reserved
 									</li>
 									<li class="nav-item text-white-50">
-										京ICP备14055008号-4 &nbsp;&nbsp;&nbsp;&nbsp;
+										赣ICP备1405500X号-4 &nbsp;&nbsp;&nbsp;&nbsp;
 										<img src="http://static.nowcoder.com/company/images/res/ghs.png" style="width:18px;" />
-										京公网安备 11010502036488号
+										赣公网安备 1101050203648X号
 									</li>
 								</ul>
 							</div>

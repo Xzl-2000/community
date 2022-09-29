@@ -1,8 +1,10 @@
 package com.miki.community;
 
 import com.miki.community.dao.DiscussPostMapper;
+import com.miki.community.dao.LoginTicketMapper;
 import com.miki.community.dao.UserMapper;
 import com.miki.community.entity.DiscussPost;
+import com.miki.community.entity.LoginTicket;
 import com.miki.community.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.junit.jupiter.api.Test;
@@ -19,8 +21,12 @@ public class MapperTests {
 
     @Autowired
     private UserMapper userMapper;
+
     @Autowired
     private DiscussPostMapper discussPostMapper;
+
+    @Autowired
+    private LoginTicketMapper loginTicketMapper;
 
     @Test
     public void testSelectUser(){
@@ -71,6 +77,31 @@ public class MapperTests {
         int rows = discussPostMapper.selectDiscussPostRows(0);
         System.out.println(rows);
     }
+
+    @Test
+    public void testInsertLoginTicket() {
+        //向loginTicket随便插数据进行测试
+        LoginTicket loginTicket = new LoginTicket();
+        loginTicket.setUserId(101);
+        loginTicket.setTicket("abc");
+        loginTicket.setStatus(0);
+        loginTicket.setExpired(new Date(System.currentTimeMillis() + 1000 * 60 * 10));
+        loginTicketMapper.insertLoginTicket(loginTicket);
+    }
+
+    @Test
+    public void testSelectLoginTicket() {
+        LoginTicket loginTicket = loginTicketMapper.selectByTicket("abc");
+        System.out.println(loginTicket);
+        loginTicketMapper.updateStatus("abc", 1);
+        LoginTicket loginTicket1 = loginTicketMapper.selectByTicket("abc");
+        System.out.println(loginTicket1);
+    }
+
+    /*@Test
+    public void testUpdatePreviousLoginTicket() {
+        loginTicketMapper.updatePreviousLoginTicket("5bcd23c12bfa4c739b202e3661afdbb9", 180);
+    }*/
 
 
 }

@@ -10,7 +10,7 @@ import java.util.Date;
 public class DiscussPost {
     private int id;
     private int userId;
-    private Spring title;
+    private String title;
     private String content;
     private int type;
     private int status;
@@ -34,11 +34,11 @@ public class DiscussPost {
         this.userId = userId;
     }
 
-    public Spring getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(Spring title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
